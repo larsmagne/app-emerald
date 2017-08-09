@@ -1,0 +1,234 @@
+body {
+  background: linear-gradient(to bottom, #f05050 0%, #903030 100%);
+  font-family: arial, sans-serif;
+  text: black;
+}
+::-webkit-scrollbar { 
+  display: none; 
+}
+table.main {
+  margin: auto;
+  width: 1200px;
+  height: 100%;
+  table-layout: fixed;
+}
+table.main td {
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  background: linear-gradient(to bottom, white 0%, #e0e0e0 100%);
+}
+td#publisher {
+  height: 40px;
+  vertical-align: middle;
+}
+td#title {
+  height: 70px;
+  font-size: larger;
+  font-weight: bold;
+}
+td#creators {
+  width: 500px;
+  height: 70px;
+}
+tr.misc {
+  height: 40px;
+  vertical-align: middle;
+}
+tr.misc td {
+  text-align: center;
+}
+td#text {
+  height: 300px;
+}
+td#variants {
+  height: 150px;
+}
+td#cover {
+  width: 500px;
+  text-align: center;
+  position: relative;
+}
+
+td#options {
+  width: 200px;
+  word-wrap: none;
+}
+
+tr {
+  vertical-align: top;
+}
+
+table.actions {
+  height: 100%;
+  width: 100%;
+}
+
+table.actions td {
+  background: #c0c0c0;
+}
+td.navigation {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+td#export {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+td.first {
+  background: #40a040 !important;
+}
+td.special-publisher {
+  background: #40a040 !important;
+}
+option.special-publisher {
+  background-color: #40a040 !important;
+}
+
+div.variant {
+  display: block;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+td.select {
+  text-align: center;
+}
+select {
+  width: 160px;
+}
+td.first-publisher {
+  font-weight: bold;
+}
+input[type=checkbox] {
+  margin-right: 1ex;
+}
+td.about {
+  text-align: center;
+}
+a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+div.close {
+  text-align: center;
+  display: block:
+  width: 100%;
+  font-weight: bold;
+  padding-top: 40px;
+}
+div.close span {
+  background: #c0c0c0;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+td#logo {
+  text-align: right;
+  vertical-align: bottom;
+}
+
+input[type=checkbox] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+}
+
+td#text {
+  max-height: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+td#text:hover {
+  text-overflow: inherit;
+  overflow: visible;
+}
+
+td#text:after {
+  content: '';
+  display: block;
+  margin-bottom: -10000px;
+}
+
+td#text:hover:after {
+  content: '';
+  display: block;
+  margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 760px) {
+  /* Style adjustments for small screens. */
+  td#cover {
+    width: default;
+    text-align: center;
+    position: default;
+  }
+  table.main {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    table-layout: auto;
+  }
+  td#publisher {
+    height: auto;
+  }
+  td#title {
+    height: auto;
+  }
+  td#creators {
+    width: 100%;
+    height: auto;
+  }
+  tr.misc {
+    height: 40px;
+  }
+  td#text {
+    height: auto;
+    max-height: auto;
+    text-overflow: initial;
+    overflow: initial;
+  }
+  td#text:after {
+    display: block;
+    margin-bottom: auto;
+  }
+  td#variants {
+    height: auto;
+  }
+  td.navigation {
+    vertical-align: middle;
+  }
+  td#buy-td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  td#small-menu {
+    text-align: center;
+    vertical-align: middle;
+  }
+  div#menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: black;
+  }
+  table.actions td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  td#close-menu {
+    font-weight: bold;
+  }
+  body {
+    margin: 0px;
+  }
+}

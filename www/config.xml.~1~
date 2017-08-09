@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="no.ingebrigtsen.csid" version="1.2.9"
+	android-versionCode="102090"
+	xmlns="http://www.w3.org/ns/widgets"
+	xmlns:cdv="http://cordova.apache.org/ns/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Concerts in Oslo</name>
+    <description>
+        Concerts in Oslo
+    </description>
+    <author email="larsi@gnus.org" href="http://lars.ingebrigtsen.no/">
+        Lars Magne Ingebrigtsen
+    </author>
+
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+
+    <access origin="*" browserOnly="true"/>
+
+    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+
+    <feature name="StatusBar">
+      <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
+
+    <gap:plugin name="cordova-plugin-device" source="npm" />
+    <gap:plugin name="cordova-plugin-network-information" source="npm" />
+    <gap:plugin name="cordova-plugin-file" source="npm" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+
+    <feature name="Device">
+      <param name="ios-package" value="CDVDevice" onload="true" />
+    </feature>
+
+    <gap:plugin name="cordova-plugin-calendar" source="npm" />
+    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <gap:plugin name="cordova-plugin-geolocation" source="npm" />
+    
+    <preference name="Orientation" value="portrait" />
+    
+    <preference name="fullscreen" value="false" />
+    
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+
+    <icon src="csid-icon.png" platform="android" density="ldpi" />
+    <icon src="csid-icon.png" platform="android" density="mdpi" />
+    <icon src="csid-icon.png" platform="android" density="hdpi" />
+    <icon src="csid-icon.png" platform="android" density="xhdpi" />
+
+    <icon src="csid-icon.png" platform="ios" width="512" height="512" />
+    <icon src="csid-icon72.png" platform="ios" width="72" height="72" />
+    <icon src="csid-icon57.png" platform="ios" width="57" height="57" />
+    <icon src="csid-icon152.png" platform="ios" width="152" height="152" />
+
+    <icon src="csid-icon48.png" gap:platform="winphone" width="48" height="48" />
+    <icon src="csid-icon62.png" gap:platform="winphone" width="62" height="62" />
+    <icon src="csid-icon-notext173.png" gap:platform="winphone" width="173" height="173" />
+    
+    <!-- iPhone / iPod Touch  -->
+    <icon src="icon-60.png" gap:platform="ios" width="60" height="60" />
+    <icon src="icon-60x2.png" gap:platform="ios" width="120" height="120" />
+    <!-- iPad -->
+    <icon src="icon-76.png" gap:platform="ios" width="76" height="76" />
+    <icon src="icon-76@x2.png" gap:platform="ios" width="152" height="152" />
+    <!-- Settings Icon -->
+    <icon src="icon-29.png" gap:platform="ios" width="29" height="29" />
+    <icon src="icon-29x2.png" gap:platform="ios" width="58" height="58" />
+    <icon src="icon-29x3.png" gap:platform="ios" width="87" height="87" />
+    <!-- Spotlight Icon -->
+    <icon src="icon-40.png" gap:platform="ios" width="40" height="40" />
+    <icon src="icon-40x2.png" gap:platform="ios" width="80" height="80" />
+
+    <!-- iPhone and iPod touch -->
+    <!-- iPhone 5 / iPod Touch (5th Generation) -->
+      <!-- iPad -->
+    <icon src="icon-50.png" gap:platform="ios" width="50" height="50" />
+    <icon src="icon-50x2.png" gap:platform="ios" width="100" height="100" />
+    <icon src="icon-57.png" gap:platform="ios" width="57" height="57" />
+    <icon src="icon-57x2.png" gap:platform="ios" width="114" height="114" />
+    <icon src="icon-72.png" gap:platform="ios" width="72" height="72" />
+    <icon src="icon-72x2.png" gap:platform="ios" width="144" height="144" />
+    <icon src="icon-83.5x2.png" gap:platform="ios" width="167" height="167" />
+    <!-- Retina iPad -->
+
+    <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+    <preference name="SplashScreen" value="splash" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <splash src="splash.png" />
+    
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
+    
+    <platform name="ios">
+      <!-- images are determined by width and height. The following are supported -->
+      <splash src="splash-320.png" width="320" height="480"/>
+      <splash src="splash-320x2.png" width="640" height="960"/>
+      <splash src="splash-768.png" width="768" height="1024"/>
+      <splash src="splash-768x2.png" width="1536" height="2048"/>
+      <splash src="splash-1024.png" width="1024" height="768"/>
+      <splash src="splash-1024x2.png" width="2048" height="1536"/>
+      <splash src="splash-640.png" width="640" height="1136"/>
+      <splash src="splash-750.png" width="750" height="1334"/>
+      <splash src="splash-1242.png" width="1242" height="2208"/>
+      <splash src="splash-2208.png" width="2208" height="1242"/>
+    </platform>
+
+    <platform name="android">
+      <preference name="android-minSdkVersion" value="23" />
+    </platform>
+    
+    <gap:config-file platform="android" parent="/manifest">
+      <supports-screens 
+          android:xlargeScreens="true" 
+          android:largeScreens="true" 
+          android:smallScreens="true" />
+      <application android:theme="@android:style/Theme.NoTitleBar" >
+        <activity android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+      </application>
+    </gap:config-file>
+
+    <gap:config-file platform="ios" parent="NSCalendarsUsageDescription" overwrite="true">
+      <string>Allow exporting events to the calendar.</string>
+    </gap:config-file>
+</widget>

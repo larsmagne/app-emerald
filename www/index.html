@@ -1,0 +1,74 @@
+<head>
+  <meta charset='utf-8'>
+  <link href='emerald.css' rel='stylesheet' type='text/css'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script type='text/javascript' src='jquery-1.10.2.min.js'></script>
+  <script type='text/javascript' src='hammer.min.js'></script>
+  <link rel='icon' href='favicon.ico'>
+  <title>Goshenite</title>
+</head>
+<body>
+  <table class="main">
+    <tbody id="tmain">
+    <tr>
+      <td id="publisher" colspan=3></td>
+      <td id="creators">
+      <td id="options" rowspan=6>
+	<form>
+	<table class="actions">
+	  <tr><td class="about" colspan=2><a href="http://lars.ingebrigtsen.no/2015/10/22/a-simpler-previews-interface/">About</a>
+	  <tr><td id="export" colspan=2>Export data
+	  <tr><td colspan=2 class="select"><select id="publishers"></select>
+	  <tr><td colspan=2 class="select"><select id="months"></select>
+	  <tr>
+	    <td colspan=2>
+              <label><input id="variants" type=checkbox>Variants</label><br>
+	      <label><input id="resolicitations" type=checkbox>Resolicitations</label><br>
+	      <label><input id="relistings" type=checkbox>Relistings</label><br>
+	      <label><input id="ones" type=checkbox>First issues</label><br>
+              <label><input id="gns" type=checkbox>Graphic novels etc</label><br>
+              <label><input id="other" type=checkbox>Other</label><br>
+	  <tr class="removable"><td id="buy-td" colspan=2><label><input id="buy"
+	  type=checkbox>I might buy this</label><br>
+
+	      <tr class="removable">
+		<td id="prev" class="navigation" title="Previous comic">&lt;&lt;
+		<td id="next" class="navigation" title="Next comic">&gt;&gt;
+	      <tr class="removable">
+		<td id="prevPublisher" class="navigation" title="Previous publisher">&lt;&lt;&lt;
+		<td id="nextPublisher" class="navigation" title="Next publisher">&gt;&gt;&gt;
+	  <tr class="removable"><td id="explanation" colspan=2>Use the arrow keys to go
+	  the next/ previous comic, and PageUp/ PageDown to go to the
+	  next/ previous publisher.  B or Enter to toggle the 'buy'
+	  mark.  Click publisher name to 'favourite' and be sorted
+	  first (and display all issues).
+	</table>
+	</form>
+    <tr>
+      <td id="title" colspan=3>Loading data...
+      <td id="cover" rowspan=7>
+    <tr>
+      <td id="text" colspan=3>Goshenite lists all new releases to the
+      American direct sales market based on the Diamond Previews catalogue.
+    <tr class="misc">
+      <td id="issue" title="Issue number">
+      <td id="price" title="Price">
+      <td id="class" title="Listing class">
+    <tr class="misc">
+      <td id="date" title="Release date">
+      <td id="original" title="Original Code">
+      <td id="code" title="Code">
+    <tr class="misc">
+      <td id="limited" title="Number of issues in series">
+      <td id="comething" title="I have no idea what this is">
+      <td id="mature" title="Mature readers">
+    <tr>
+      <td id="variant-comics" colspan=3 title="Variant editions">
+      <td id="logo"><img src="goshenite.png">
+
+  </tbody>
+  </table>
+  <script type='text/javascript' src='emerald.js'></script>
+  <script type='text/javascript' src='http://goshenite.no/data/timestamp.js'></script>
+  <script type='text/javascript'>startUp();</script>
+</body>
