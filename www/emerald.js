@@ -165,6 +165,12 @@ function loadImageAndDisplay(comic, noPush, noVariants) {
     display(comic, false, noPush, noVariants);
     return;
   }
+  var pre = preloadedImages[comic.img];
+  if (pre) {
+    console.log("Preloaded");
+    preloadedImages[comic.img] = false;
+    display(comic, pre, noPush, noVariants);
+  }
   var image = document.createElement("img");
   lastImage = image;
   image.onload = function() {
@@ -380,11 +386,14 @@ function wanted(comic) {
   return true;
 }
 
+var preloadedImages = [];
+
 function preloadImage(comic) {
-  if (! comic || ! comic.img)
+  if (! comic || ! comic.img || preloadedImages[comic.img])
     return;
   var image = document.createElement("img");
   image.onload = function() {
+    preloadedImages[comic.img] = image;
     $(image).remove();
   };
   image.src = comic.img;
@@ -713,7 +722,7 @@ function rearrangeForMobile() {
   if (isMobile) {
     $("td.about").html("About");
     $("td.about").click(function() {
-      colorbox("This app displays information about comics that can be ordered in the American direct market from Diamond Comic Distributors.  The data comes from their web site.<p>You can mark the comics you are interested in here in this app and then click the 'Share' button to send this list to, for instance, a friendly comic book store that will then order the books in for you.<p>For a more in-depth rationale behind this app, see <a href='http://lars.ingebrigtsen.no/2015/10/22/a-simpler-previews-interface/'>this article</a>.");
+      colorbox("This app displays information about comics that can be ordered in the American direct market from <a href='http://www.diamondcomics.com/'>Diamond Comic Distributors</a>.  The data comes from their web site.<p>You can mark the comics you are interested in here in this app and then click the 'Share' button to send this list to, for instance, a friendly comic book store that will then order the books in for you.<p>For a more in-depth rationale behind this app, see <a href='http://lars.ingebrigtsen.no/2015/10/22/a-simpler-previews-interface/'>this article</a>.");
     });
   }
   var $tr = $("<tr class='misc'>");
