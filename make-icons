@@ -1,10 +1,12 @@
 #!/bin/bash
 
+source=icon-text.png
+
 for s in 72 57 152 60 76 29 40 50; do
-    convert -resize ${s}x${s} www/icon.png www/icon-${s}.png
+    convert -resize ${s}x${s} $source www/icon-${s}.png
     d=$((s*2))
-    convert -resize ${d}x${d} www/icon.png www/icon-${s}x2.png
+    convert -resize ${d}x${d} $source www/icon-${s}x2.png
 done
 
-convert -resize 167x167 www/icon.png www/icon-83.5x2.png
-convert -resize 87x87 www/icon.png www/icon-29x3.png
+convert -resize 167x167 $source www/icon-83.5x2.png
+convert -resize 87x87 $source www/icon-29x3.png
