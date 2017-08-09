@@ -12,7 +12,7 @@ function startUp() {
     alert("here -1");
     //$.support.cors = true;
     alert("here 0");
-    StatusBar.overlaysWebView(false);
+    //StatusBar.overlaysWebView(false);
     alert("here 1");
   }
   alert("here 1.5");
@@ -727,13 +727,10 @@ function closeMenu() {
 
 var isMobile;
 $(document).ready(function() {
-  alert("ready 1");
   if (window.innerWidth < 760)
     isMobile = true;
   if (isMobile) {
-    alert("ready 2");
     rearrangeForMobile();
-    alert("ready 3");
     var mc = new Hammer($("body")[0]);
     mc.on("swipeleft", function() {
       gotoNext();
@@ -746,5 +743,3 @@ $(document).ready(function() {
 });
 isMobile = true;
 phoneGap = true;
-
-alert("start 1");
