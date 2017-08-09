@@ -10,7 +10,7 @@ var phoneGap = false;
 function startUp() {
   if (phoneGap) {
     alert("here -1");
-    $.support.cors = true;
+    //$.support.cors = true;
     alert("here 0");
     StatusBar.overlaysWebView(false);
     alert("here 1");
