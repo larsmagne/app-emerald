@@ -9,15 +9,10 @@ var phoneGap = false;
 
 function startUp() {
   if (phoneGap) {
-    alert("here -1");
-    //$.support.cors = true;
-    alert("here 0");
-    //StatusBar.overlaysWebView(false);
-    alert("here 1");
+    $.support.cors = true;
+    StatusBar.overlaysWebView(false);
   }
-  alert("here 1.5");
   var spinner = startSpinner();
-  alert("here 2");
   var match = window.location.href.match("month=([-0-9]+)");
   if (match)
     emeraldDate = match[1];
@@ -29,7 +24,6 @@ function startUp() {
     url = url + sep + "month=" + emeraldDate;
     window.history.pushState("emerald", "emerald", url);
   }
-  alert("here 2");
   $.ajax({
     url: "http://goshenite.no/data/previews-" + emeraldDate + ".json",
     dataType: "json",
@@ -726,20 +720,22 @@ function closeMenu() {
 }
 
 var isMobile;
-$(document).ready(function() {
-  if (window.innerWidth < 760)
-    isMobile = true;
-  if (isMobile) {
-    rearrangeForMobile();
-    var mc = new Hammer($("body")[0]);
-    mc.on("swipeleft", function() {
-      gotoNext();
-    });
-    mc.on("swiperight", function() {
-      gotoPrev();
-    });
-  }
-  startUp();
-});
+function prepareStart() {
+  $(document).ready(function() {
+    if (window.innerWidth < 760)
+      isMobile = true;
+    if (isMobile) {
+      rearrangeForMobile();
+      var mc = new Hammer($("body")[0]);
+      mc.on("swipeleft", function() {
+	gotoNext();
+      });
+      mc.on("swiperight", function() {
+	gotoPrev();
+      });
+    }
+    startUp();
+  });
+}
 isMobile = true;
 phoneGap = true;
