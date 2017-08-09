@@ -8,5 +8,7 @@ icons:
 		convert -resize $${s}x$${s} www/icon.png www/icon$${s}.png;\
 		d=`expr $$s \* 2`\
 		convert -resize $${d}x$${d} www/icon.png www/icon$${s}x2.png;\
-	done;\
-	echo convert -resize 167x167 www/icon.png www/icon83.5x2.png 
+	done
+	echo convert -resize 167x167 www/icon.png www/icon83.5x2.png
+	cp www/icon* .
+
