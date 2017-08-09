@@ -9,10 +9,13 @@ var phoneGap = false;
 
 function startUp() {
   if (phoneGap) {
+    alert("here -1");
     $.support.cors = true;
+    alert("here 0");
     StatusBar.overlaysWebView(false);
     alert("here 1");
   }
+  alert("here 1.5");
   var spinner = startSpinner();
   alert("here 2");
   var match = window.location.href.match("month=([-0-9]+)");
