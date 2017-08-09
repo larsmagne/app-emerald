@@ -733,6 +733,7 @@ $(document).ready(function() {
       gotoPrev();
     });
   }
+  startUp();
 });
 isMobile = true;
 phoneGap = true;
