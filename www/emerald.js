@@ -7,7 +7,7 @@ var categories = ["variants", "resolicitations", "relistings",
 var activeCategories = false;
 
 function startUp() {
-  startSpinner();
+  var spinner = startSpinner();
   var match = window.location.href.match("month=([-0-9]+)");
   if (match)
     emeraldDate = match[1];
@@ -23,6 +23,7 @@ function startUp() {
     url: "http://goshenite.no/data/previews-" + emeraldDate + ".json",
     dataType: "json",
     success: function(data) {
+      removeSpinner(spinner);
       var s = localStorage.getItem("specials");
       if (! s)
 	var specials = false;
