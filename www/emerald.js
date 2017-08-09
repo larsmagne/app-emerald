@@ -462,15 +462,15 @@ function checkCategories () {
 
 function colorbox(html) {
   var box = document.createElement("div");
-  box.style.position = "absolute";
+  box.style.position = "fixed";
   box.style.left = "0px";
-  box.style.top = $(window).scrollTop() + "px";
+  box.style.top = "0px";
   box.style.height = window.innerHeight + "px";
   box.style.width = window.innerWidth + "px";
   box.style.display = "block";
   box.style.background = "#f0f0f0";
   box.style.color = "black";
-  box.style.padding = "100px";
+  box.style.padding = "50px";
   box.className = "event-lightbox";
   box.innerHTML = html + "<div class='close'><span>Close</span></div>";
   document.body.appendChild(box);
@@ -758,7 +758,7 @@ function shareBuyList() {
       return;
     var comic = comics[currentIndex(code)];
     text += code + " (" + comic.publisher + ") " +
-      comic.name + "\n";
+      comic.name + "\n\n";
   });
   window.plugins.socialsharing.share(text);
 }
