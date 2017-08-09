@@ -11,8 +11,10 @@ function startUp() {
   if (phoneGap) {
     $.support.cors = true;
     StatusBar.overlaysWebView(false);
+    alert("here 1");
   }
   var spinner = startSpinner();
+  alert("here 2");
   var match = window.location.href.match("month=([-0-9]+)");
   if (match)
     emeraldDate = match[1];
@@ -24,6 +26,7 @@ function startUp() {
     url = url + sep + "month=" + emeraldDate;
     window.history.pushState("emerald", "emerald", url);
   }
+  alert("here 2");
   $.ajax({
     url: "http://goshenite.no/data/previews-" + emeraldDate + ".json",
     dataType: "json",
