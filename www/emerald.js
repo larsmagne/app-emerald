@@ -710,7 +710,7 @@ function rearrangeForMobile() {
   $("body").append($menu);
   if (phoneGap)
     $("table.actions").find("tbody").append($("<tr><td id='share'>Share</td></tr>"));
-  $("table.actions").find("tbody").append($("<tr><td id='close-menu'>Close</td></tr>"));
+  $("table.actions").find("tbody").append($("<tr><td id='close-menu'>Close</td></tr><tr><td id='menu-spacer'>&nbsp;</td></tr>"));
 
   $.map([creators, cover], function(elem) {
     var tr = document.createElement("tr");
@@ -854,6 +854,11 @@ function prepareStart() {
     if (window.innerWidth < 760)
       isMobile = true;
     if (isMobile) {
+      if ('addEventListener' in document) {
+	document.addEventListener('DOMContentLoaded', function() {
+	  FastClick.attach(document.body);
+	}, false);
+      }
       rearrangeForMobile();
       var mc = new Hammer($("body")[0]);
       mc.on("swipeleft", function() {
