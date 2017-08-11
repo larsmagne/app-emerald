@@ -100,8 +100,9 @@ function display(comic, image, noPush, noVariants) {
       ratio = image.width / (window.innerWidth - 10);
       // Ensure that we start out with a reasonable size.
       if ($("#cover").height() < window.innerHeight / 3)
-	$("#cover").css("height", window.innerHeight / 2 + "px");
-      cHeight = $("#cover").height() + 10;
+	cHeight = window.innerHeight / 2;
+      else
+	cHeight = $("#cover").height() + 10;
       image.style.width = window.innerWidth - 10;
       image.style.height = "";
       var oldSize;
@@ -109,9 +110,13 @@ function display(comic, image, noPush, noVariants) {
 	image.style.width = "";
 	image.style.height = cHeight;
 	setTimeout(function() {
-	  var newHeight = $("#cover").height() + 10;
+	  if ($("#cover").height() < window.innerHeight / 2)
+	    $("#cover").css("height", window.innerHeight / 2 + "px");
+	  else
+	    $("#cover").css("height", "100%");
+	  var newHeight = $("#cover").height();
 	  if (newHeight < cHeight) {
-	    $(image).animate({height: newHeight + 30}, 80, function() {
+	    $(image).animate({height: newHeight + 10}, 80, function() {
 	      oldSize = [$(image).width(), $(image).height()];
 	    });
 	  }
@@ -119,14 +124,13 @@ function display(comic, image, noPush, noVariants) {
       }
       setTimeout(function() {
 	oldSize = [$(image).width(), $(image).height()];
-	console.log(oldSize);
       }, 1);
       
       var expanded = false;
       if (image.height / ratio < cHeight)
 	var fullSize = [image.width / ratio - 10, window.innerHeight - 10];
       else
-	fullSize = [window.innerWidth - 20, image.height / ratio - 20];
+	fullSize = [window.innerWidth - 10, image.height / ratio - 10];
       $(image).click(function() {
 	if (expanded)
 	  $(image).animate({width: oldSize[0],
@@ -138,7 +142,6 @@ function display(comic, image, noPush, noVariants) {
 			     80);
 	expanded = ! expanded;
       });
-      $("#cover").css("height", window.innerHeight / 2 + "px");
     }
     image.style.display = "inline";
     $("#cover").append(image);
@@ -802,10 +805,6 @@ function rearrangeForMobile() {
     $(barCont).css({"top": window.innerHeight - 45 + "px",
 		    "display": "block"});
   });
-}
-
-function makeNavigationBar() {
-  console.log("making navigation");
 }
 
 function waitForWebfonts(font, weight, callback) {
