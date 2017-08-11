@@ -25,7 +25,7 @@ function startUp() {
     window.history.pushState("emerald", "emerald", url);
   }
   $.ajax({
-    url: "http://goshenite.no/data/previews-" + emeraldDate + ".json",
+    url: "http://goshenite.info/data/previews-" + emeraldDate + ".json",
     dataType: "json",
     success: function(data) {
       removeSpinner(spinner);
@@ -98,9 +98,14 @@ function display(comic, image, noPush, noVariants) {
       image.style.top = "5px";
       image.style.left = "5px";
       ratio = image.width / (window.innerWidth - 10);
+      var scale = 2;
+      // On smaller devices, use proportionally larger parts of the
+      // screen for the cover.
+      if (window.innerHeight < 1000)
+	scale = 1.5;
       // Ensure that we start out with a reasonable size.
-      if ($("#cover").height() < window.innerHeight / 3)
-	cHeight = window.innerHeight / 2;
+      if ($("#cover").height() < window.innerHeight / scale)
+	cHeight = window.innerHeight / scale;
       else
 	cHeight = $("#cover").height() + 10;
       image.style.width = window.innerWidth - 10;
@@ -110,8 +115,8 @@ function display(comic, image, noPush, noVariants) {
 	image.style.width = "";
 	image.style.height = cHeight;
 	setTimeout(function() {
-	  if ($("#cover").height() < window.innerHeight / 2)
-	    $("#cover").css("height", window.innerHeight / 2 + "px");
+	  if ($("#cover").height() < window.innerHeight / scale)
+	    $("#cover").css("height", window.innerHeight / scale + "px");
 	  else
 	    $("#cover").css("height", "100%");
 	  var newHeight = $("#cover").height();
@@ -128,9 +133,9 @@ function display(comic, image, noPush, noVariants) {
       
       var expanded = false;
       if (image.height / ratio < cHeight)
-	var fullSize = [image.width / ratio - 10, window.innerHeight - 10];
+	var fullSize = [image.width / ratio - 15, window.innerHeight - 15];
       else
-	fullSize = [window.innerWidth - 10, image.height / ratio - 10];
+	fullSize = [window.innerWidth - 15, image.height / ratio - 15];
       $(image).click(function() {
 	if (expanded)
 	  $(image).animate({width: oldSize[0],
@@ -197,11 +202,11 @@ function display(comic, image, noPush, noVariants) {
 var lastImage = false;
 
 function loadImageAndDisplay(comic, noPush, noVariants) {
-  if (! comic.img) {
+  if (! imgUrl(comic)) {
     display(comic, false, noPush, noVariants);
     return;
   }
-  var pre = preloadedImages[comic.img];
+  var pre = preloadedImages[imgUrl(comic)];
   if (pre) {
     display(comic, pre[1], noPush, noVariants);
     return;
@@ -220,7 +225,7 @@ function loadImageAndDisplay(comic, noPush, noVariants) {
     $(image).remove();
     display(comic, false, noPush, noVariants);
   };
-  image.src = comic.img;
+  image.src = imgUrl(comic);
   image.style.width = "480px";
   image.style.display = "none";
   // Display a spinner image if the image isn't in the cache.
@@ -424,14 +429,14 @@ function wanted(comic) {
 var preloadedImages = [];
 
 function preloadImage(comic) {
-  if (! comic || ! comic.img || preloadedImages[comic.img])
+  if (! comic || ! imgUrl(comic) || preloadedImages[imgUrl(comic)])
     return;
   var image = document.createElement("img");
   image.onload = function() {
-    preloadedImages[comic.img] = [new Date(), image];
+    preloadedImages[imgUrl(comic)] = [new Date(), image];
     $(image).remove();
   };
-  image.src = comic.img;
+  image.src = imgUrl(comic);
   image.style.display = "none";
   image.style.width = "480px";
   image.style.display = "none";
@@ -896,5 +901,11 @@ function prepareStart() {
   });
 }
 
+function imgUrl(comic) {
+  if (! comic || ! comic.img)
+    return false;
+  return "http://goshenite.info/data/img/" + emeraldDate + "/" +
+    comic.code + "-scale.jpg";
+}
 isMobile = true;
 phoneGap = true;
