@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source=icon-text.png
+source=assets/red-icon.png
 
 for s in 72 57 152 60 76 29 40 50; do
     convert -resize ${s}x${s} $source www/icon-${s}.png
