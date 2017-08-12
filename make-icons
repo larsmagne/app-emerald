@@ -10,5 +10,5 @@ done
 
 convert -resize 167x167 $source www/icon-83.5x2.png
 convert -resize 87x87 $source www/icon-29x3.png
-cp $source www/icon.png
+convert -resize 512x512 $source www/icon.png
 
