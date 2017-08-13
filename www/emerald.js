@@ -9,8 +9,16 @@ var phoneGap = false;
 
 function startUp() {
   if (phoneGap) {
-    //$.support.cors = true;
-    //StatusBar.overlaysWebView(false);
+    // Add a dummy "resume" handler so that the app doesn't restart
+    // when it's brought back from sleep.
+    document.addEventListener("resume", function() {
+    }, false);
+    var cur = localStorage.getItem("current");
+    if (cur) {
+      cur = cur.split(/,/);
+      emeraldDate = cur[0];
+      current = cur[1];
+    }
   }
   var spinner = startSpinner();
   var match = window.location.href.match("month=([-0-9]+)");
@@ -56,6 +64,8 @@ function startUp() {
       var match = window.location.href.match("code=(.*)");
       if (match)
 	loadImageAndDisplay(data[currentIndex(match[1])]);
+      else if (phoneGap && current)
+	loadImageAndDisplay(data[currentIndex(current)]);
       else
 	loadImageAndDisplay(data[0]);
       addNavigation();
@@ -68,6 +78,8 @@ function startUp() {
   });
 }
 
+var firstTime = true;
+
 function display(comic, image, noPush, noVariants) {
   current = comic.code;
   var url = window.location.href;
@@ -79,6 +91,9 @@ function display(comic, image, noPush, noVariants) {
       sep = "&";
     url = url + sep + "code=" + comic.code;
   }
+  // Record the current state so that we can return to it if the app
+  // is restarted.
+  localStorage.setItem("current", emeraldDate + "," + comic.code);
   if (! noPush)
     window.history.pushState(comic.code, comic.name, url);
   if (image) {
@@ -104,10 +119,16 @@ function display(comic, image, noPush, noVariants) {
       if (window.innerHeight < 1000)
 	scale = 1.5;
       // Ensure that we start out with a reasonable size.
-      if ($("#cover").height() < window.innerHeight / 3)
+      if (firstTime) {
+	$("#cover").css("height", window.innerHeight / scale + "px");
 	cHeight = window.innerHeight / scale;
-      else
-	cHeight = $("#cover").height() + 10;
+	firstTime = false;
+      } else {
+	if ($("#cover").height() < window.innerHeight / 3)
+	  cHeight = window.innerHeight / scale;
+	else
+	  cHeight = $("#cover").height() + 10;
+      }
       image.style.width = window.innerWidth - 10;
       image.style.height = "";
       var oldSize;
@@ -233,6 +254,8 @@ function loadImageAndDisplay(comic, noPush, noVariants) {
     var spinner = startSpinner();
 }
 
+var userAction = "next";
+
 function addNavigation() {
   $("#next").bind("click", gotoNext);
   $("#prev").bind("click", gotoPrev);
@@ -244,22 +267,26 @@ function addNavigation() {
     switch(e.which) {
     case 37: // left
     case 38: // up
+      userAction = "prev";
       removeExplanation();
       gotoPrev();
       break;
 
     case 39: // right
     case 40: // down
+      userAction = "next";
       removeExplanation();
       gotoNext();
       break;
 
     case 33: // pgup
+      userAction = "prevPublisher";
       removeExplanation();
       gotoPrevPublisher();
       break;
 
     case 34: // pgdown
+      userAction = "nextPublisher";
       removeExplanation();
       gotoNextPublisher();
       break;
@@ -360,17 +387,37 @@ function gotoPrevPublisher() {
 
 function preload() {
   var len = comics.length;
-  for (var i = 0; i < len; i++) {
-    if (comics[i]["code"] == current) {
-      var remaining = 10;
-      while (remaining > 0 && i < len) {
-	i++;
-	if (wanted(comics[i])) {
-	  preloadImage(comics[i]);
-	  remaining--;
-	}
-      }
-      return;
+  var start = currentIndex();
+  var i = start;
+  var remaining = 10;
+  // If the user is using the "next publisher", then don't preload
+  // as much.
+  if (userAction == "prevPublisher" || userAction == "nextPublisher")
+    remaining = 2;
+  while (remaining > 0 && i < len && i > 0) {
+    // Preload in the direction the user is moving.
+    if (userAction == "next" || userAction == "nextPublisher")
+      i++;
+    else
+      i--;
+    if (wanted(comics[i])) {
+      preloadImage(comics[i]);
+      remaining--;
+    }
+  }
+  // Also preload the next (or prev) publisher.
+  remaining = 3;
+  i = start;
+  while (remaining > 0 && i < len && i > 0) {
+    // Preload in the direction the user is moving.
+    if (userAction == "next" || userAction == "nextPublisher")
+      i++;
+    else
+      i--;
+    if (comics[start].publisher != comics[i].publisher &&
+	wanted(comics[i])) {
+      preloadImage(comics[i]);
+      remaining--;
     }
   }
 }
@@ -449,7 +496,7 @@ function mTime(d) {
 }
 
 function pruneImageCache() {
-  var size = 40;
+  var size = 100;
   var arr = [];
   var i = 0;
   for (var key in preloadedImages) {
@@ -809,6 +856,12 @@ function rearrangeForMobile() {
   waitForWebfonts("Material Icons", "normal", function() {
     $(barCont).css({"top": window.innerHeight - 45 + "px",
 		    "display": "block"});
+  });
+  // Ensure that the navbar is at the bottom even if the browser
+  // decides to change the size of the window, which happens regularly
+  // on Android when scrolling up/down.
+  window.addEventListener('resize', function(event){
+    $(barCont).css({"top": window.innerHeight - 45 + "px"});
   });
 }
 
